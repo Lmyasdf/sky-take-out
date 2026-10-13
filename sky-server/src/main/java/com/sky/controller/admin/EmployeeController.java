@@ -71,9 +71,9 @@ public class EmployeeController {
     }
 
 
-    @PostMapping("/admin/register")
+    @PostMapping("/admin/employee")
     public Result save(@RequestBody EmployeeLoginDTO employeeLoginDTO){
-        log.info("用户登录：{}",employeeLoginDTO);
+        log.info("新增员工：{}",employeeLoginDTO);
         employeeService.save(employeeLoginDTO);
         return Result.success();
     }
