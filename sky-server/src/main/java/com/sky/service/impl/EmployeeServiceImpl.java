@@ -3,6 +3,7 @@ package com.sky.service.impl;
 import com.sky.constant.MessageConstant;
 import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
+import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.entity.Employee;
 import com.sky.exception.AccountLockedException;
@@ -17,7 +18,10 @@ import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -59,22 +63,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void save(EmployeeLoginDTO employeeLoginDTO){
+    public void save(EmployeeDTO employeeDTO){
+        log.info("开始");
         Employee employee = new Employee();
-        BeanUtils.copyProperties(employeeLoginDTO,employee);
+        BeanUtils.copyProperties(employeeDTO,employee);
         employee.setStatus(StatusConstant.ENABLE);
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
-
+        log.info("拷贝完成");
     //   设置时间
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());
-
 
     //    TODO后期获取登录人id
         employee.setCreateUser(10L);
         employee.setUpdateUser(10L);
 
         employeeMapper.insert(employee);
+        log.info("插入完成");
     }
 
 }
