@@ -5,6 +5,7 @@ import com.sky.annotation.AutoFill;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
+import com.sky.entity.DishFlavor;
 import com.sky.enumeration.OperationType;
 import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Delete;
@@ -40,4 +41,7 @@ public interface DishMapper {
     //修改菜品数据
     @AutoFill(value = OperationType.UPDATE)
     void update(Dish dish);
+
+//   动态条件查询菜品
+    List<Dish> list(Dish dish);
 }

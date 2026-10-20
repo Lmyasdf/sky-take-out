@@ -15,5 +15,5 @@ public interface DishFlavorMapper {
     void deleteByDishIds(List<Long> dishIds);
 
     @Select("select * from dish_flavor where dish_id = #{id}")
-    List<DishFlavor> selectByDishId(Long id);
+    List<DishFlavor> getByDishId(Long id);
 }
